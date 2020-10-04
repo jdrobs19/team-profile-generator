@@ -2,7 +2,7 @@ const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const Manager = require('./lib/Manager');
 const inquirer = require('inquirer');
-
+const generatePage = require('./src/generate-page');
 
 let employeeArr = [];
 
@@ -33,6 +33,7 @@ const addManager = function(){
 .then(({name, id, email, office}) =>{
     let manager = new Manager(name, id, email, office);
     employeeArr.push(manager);
+    addAdditional();
 });
 }
 
@@ -63,6 +64,7 @@ const addEngineer = function(){
     .then(({name, id, email, github}) => {
         let engineer = new Engineer(name, id, email, github);
         employeeArr.push(engineer);
+        addAdditional();
     }); 
 }
 
@@ -93,6 +95,7 @@ const addIntern = function(){
     .then(({name, id, email, school}) => {
         let intern = new Intern(name, id, email, school);
         employeeArr.push(intern);
+        addAdditional();
     }); 
 }
 
@@ -114,7 +117,9 @@ const addAdditional = function(){
             addIntern();
         }
         else{
-            
+            generatePage(employeeArr);
         }
     })
 }
+
+addManager();
